@@ -21,12 +21,16 @@ namespace SchoolSystemAPI.Repository
 
         public School GetSchoolById(int Id)
         {
-            throw new NotImplementedException();
+            return _context.Schools.Where(s => s.SchoolId == Id).FirstOrDefault();
         }
-
         public School GetSchoolByName(string name)
         {
             throw new NotImplementedException();
+        }
+
+        public bool SchoolExists(int Id)
+        {
+            return _context.Schools.Any(s => s.SchoolId == Id);
         }
     }
 }

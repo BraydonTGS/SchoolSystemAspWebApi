@@ -8,6 +8,7 @@ namespace SchoolSystemAPI.Models
     {
         [Key]
         [Required]
+        [JsonIgnore]
         public int SchoolId { get; set; }
         public string SchoolName { get; set; } = null!;
         public string Address { get; set; } = null!;

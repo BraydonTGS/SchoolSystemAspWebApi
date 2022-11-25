@@ -28,5 +28,26 @@ namespace SchoolSystemAPI.Controllers
             }
             return Ok(schools); 
         }
+
+        // Get School By Id //
+        [HttpGet("{Id}")]
+        [ProducesResponseType(200, Type = typeof(School))]
+        [ProducesResponseType(400)]
+        public IActionResult GetSchoolById(int Id)
+        {
+            if (!_repository.SchoolExists(Id))
+            {
+                return NotFound(); 
+            }
+            var school = _repository.GetSchoolById(Id);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+
+            }
+            return Ok(school);
+
+        }
     }
 }

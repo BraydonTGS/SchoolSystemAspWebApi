@@ -6,6 +6,7 @@ namespace SchoolSystemAPI.Interfaces
     {
         public IEnumerable<School> GetAllSchools();
         public School GetSchoolById(int Id);
-        public School GetSchoolByName(string name); 
+        public School GetSchoolByName(string name);
+        public bool SchoolExists(int Id); 
     }
 }
