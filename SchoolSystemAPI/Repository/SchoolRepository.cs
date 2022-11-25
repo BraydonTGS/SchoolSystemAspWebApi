@@ -19,15 +19,13 @@ namespace SchoolSystemAPI.Repository
             return _context.Schools.OrderBy(id => id).ToList();
         }
 
-        public School GetSchoolById(int Id)
+        public School? GetSchoolById(int Id)
         {
-            return _context.Schools.Where(s => s.SchoolId == Id).FirstOrDefault();
+       
+            var school = _context.Schools.Where(s => s.SchoolId == Id).FirstOrDefault();
+            return school; 
+           
         }
-        public School GetSchoolByName(string name)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool SchoolExists(int Id)
         {
             return _context.Schools.Any(s => s.SchoolId == Id);
