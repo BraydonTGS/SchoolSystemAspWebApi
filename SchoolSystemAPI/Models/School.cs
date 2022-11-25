@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace SchoolSystemAPI.Models
 {
@@ -11,9 +13,11 @@ namespace SchoolSystemAPI.Models
         public string Address { get; set; } = null!;
         public string City { get; set; } = null!;
         public string State { get; set; } = null!;
-        public string PostalCode { get; set; } = null!; 
+        public string PostalCode { get; set; } = null!;
 
-        public IEnumerable<Teacher> Teachers { get; set; } = Enumerable.Empty<Teacher>(); 
+        [JsonIgnore]
+        public IEnumerable<Teacher> Teachers { get; set; } = Enumerable.Empty<Teacher>();
+        [JsonIgnore]
         public IEnumerable<Student> Students { get; set; } = Enumerable.Empty<Student>(); 
     }
 }
