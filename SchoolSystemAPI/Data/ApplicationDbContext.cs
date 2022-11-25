@@ -7,11 +7,11 @@ namespace SchoolSystemAPI.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base (options) { }
 
-        DbSet<ClassRoom> ClassRooms { get; set; }
-        DbSet<School> Schools { get; set; } 
-        DbSet<Student> Students { get; set; }
-        DbSet<Subject> Subjects { get; set; }
-        DbSet<Teacher> Teachers { get; set; }
+        public DbSet<ClassRoom> ClassRooms { get; set; }
+        public DbSet<School> Schools { get; set; } 
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
 
 
      
