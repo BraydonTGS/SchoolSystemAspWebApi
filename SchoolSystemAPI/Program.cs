@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolSystemAPI.Data;
+using SchoolSystemAPI.Interfaces;
+using SchoolSystemAPI.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +18,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 }); 
 var app = builder.Build();
 
+// Dependency Injection && Repository Pattern //
+builder.Services.AddScoped<ISchoolRepository, SchoolRepository>();
+builder.Services.AddScoped<IStudentRepository, StudentRepository>(); 
 // Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
