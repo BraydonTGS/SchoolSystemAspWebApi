@@ -17,6 +17,7 @@ namespace SchoolSystemAPI.Controllers
         }
 
         // Get all Schools //
+        [Route("GetAllSchools")]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<School>))]
         public IActionResult GetSchools()
@@ -30,7 +31,8 @@ namespace SchoolSystemAPI.Controllers
         }
 
         // Get School By Id //
-        [HttpGet("{Id}")]
+        [Route("GetSchoolById/{Id}")]
+        [HttpGet]
         [ProducesResponseType(200, Type = typeof(School))]
         [ProducesResponseType(400)]
         public IActionResult GetSchoolById(int Id)
@@ -47,7 +49,20 @@ namespace SchoolSystemAPI.Controllers
 
             }
             return Ok(school);
-
+        }
+        // Create a New School //
+        [Route("CreateNewSchool")]
+        [HttpPost]
+        [ProducesResponseType(200, Type =typeof(IEnumerable<School>))]
+        [ProducesResponseType(400)]
+        public IActionResult CreateNewSchool(string Name, string Address, string City, string State, string Zipcode )
+        {
+            var newSchool = _repository.CreateSchool(Name, Address, City, State, Zipcode);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return GetSchools();    
         }
     }
 }
