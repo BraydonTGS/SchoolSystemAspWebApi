@@ -11,16 +11,20 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Dependency Injection && Repository Pattern //
+builder.Services.AddScoped<ISchoolRepository, SchoolRepository>();
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+
 // Adding Db Context //
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); 
-}); 
+});
+
+
 var app = builder.Build();
 
-// Dependency Injection && Repository Pattern //
-builder.Services.AddScoped<ISchoolRepository, SchoolRepository>();
-builder.Services.AddScoped<IStudentRepository, StudentRepository>(); 
 // Configure the HTTP request pipeline.
 
 if (app.Environment.IsDevelopment())
