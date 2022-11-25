@@ -7,8 +7,8 @@ namespace SchoolSystemAPI.Models
         [Key]
         [Required]
         public int SubjectId { get; set; }
-        public string SubjectName { get; set; } = null!; 
-       public ClassRoom ClassRoom { get; set; } 
+        public string SubjectName { get; set; } = null!;
+        public ClassRoom ClassRoom { get; set; } = null!; 
 
     }
 }
