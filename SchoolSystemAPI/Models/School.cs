@@ -8,11 +8,17 @@ namespace SchoolSystemAPI.Models
     {
         [Key]
         [Required]
+        [JsonIgnore]
         public int SchoolId { get; set; }
+        [Required]
         public string SchoolName { get; set; } = null!;
+        [Required]
         public string Address { get; set; } = null!;
+        [Required]
         public string City { get; set; } = null!;
+        [Required]
         public string State { get; set; } = null!;
+        [Required]
         public string PostalCode { get; set; } = null!;
 
         [JsonIgnore]

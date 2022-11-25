@@ -8,6 +8,8 @@ namespace SchoolSystemAPI.Interfaces
         public School? GetSchoolById(int Id);
 
         public School CreateSchool(string Name, string address, string city, string state, string zipcode);
+
+        public void CreateSchoolTest(School school); 
         public bool SchoolExists(int Id); 
     }
 }

@@ -57,12 +57,31 @@ namespace SchoolSystemAPI.Controllers
         [ProducesResponseType(400)]
         public IActionResult CreateNewSchool(string Name, string Address, string City, string State, string Zipcode )
         {
+
             var newSchool = _repository.CreateSchool(Name, Address, City, State, Zipcode);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
             return GetSchools();    
+        }
+
+        // Create a New School //
+        [Route("CreateNewSchoolTest")]
+        [HttpPost]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<School>))]
+        [ProducesResponseType(400)]
+        public IActionResult CreateNewSchoolTest(School school)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _repository.CreateSchoolTest(school);
+
+            return GetSchools();
         }
     }
 }
