@@ -1,4 +1,5 @@
-﻿using SchoolSystemAPI.Models;
+﻿using SchoolSystemAPI.DTO;
+using SchoolSystemAPI.Models;
 
 namespace SchoolSystemAPI.Interfaces
 {
@@ -7,9 +8,9 @@ namespace SchoolSystemAPI.Interfaces
         public IEnumerable<School> GetAllSchools();
         public School? GetSchoolById(int Id);
 
-        public School CreateSchool(string Name, string address, string city, string state, string zipcode);
+        public School CreateSchool(SchoolDTO school); 
+        public bool SchoolExists(int Id);
 
-        public void CreateSchoolTest(School school); 
-        public bool SchoolExists(int Id); 
+        public School UpdateSchool(School school, SchoolDTO schoolDTO); 
     }
 }

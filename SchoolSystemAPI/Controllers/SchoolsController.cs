@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.DataAnnotations;
+using SchoolSystemAPI.DTO;
 using SchoolSystemAPI.Interfaces;
 using SchoolSystemAPI.Models;
 
@@ -50,38 +52,48 @@ namespace SchoolSystemAPI.Controllers
             }
             return Ok(school);
         }
-        // Create a New School //
-        [Route("CreateNewSchool")]
-        [HttpPost]
-        [ProducesResponseType(200, Type =typeof(IEnumerable<School>))]
+
+        // Update an Existing School //
+        [Route("UpdateSchool/{Id}")]
+        [HttpPut]
+        [ProducesResponseType(200, Type = typeof(School))]
         [ProducesResponseType(400)]
-        public IActionResult CreateNewSchool(string Name, string Address, string City, string State, string Zipcode )
+        public IActionResult UpdateSchool(int Id, SchoolDTO schoolDto) 
         {
+            if (!_repository.SchoolExists(Id))
+            {
+                return BadRequest(ModelState);
+            }
 
-            var newSchool = _repository.CreateSchool(Name, Address, City, State, Zipcode);
-
+            var school = _repository.GetSchoolById(Id);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            return GetSchools();    
+            if (school is null)
+            {
+                return BadRequest("School not Found"); 
+            }
+            var updateMake = _repository.UpdateSchool(school, schoolDto); 
+            
+            return Ok(updateMake);
         }
 
         // Create a New School //
         [Route("CreateNewSchoolTest")]
         [HttpPost]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<School>))]
+        [ProducesResponseType(200, Type = typeof(School))]
         [ProducesResponseType(400)]
-        public IActionResult CreateNewSchoolTest(School school)
+        public IActionResult CreateNewSchool(SchoolDTO school)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _repository.CreateSchoolTest(school);
+           var newSchool = _repository.CreateSchool(school);
 
-            return GetSchools();
+            return Ok(newSchool);
         }
     }
 }
