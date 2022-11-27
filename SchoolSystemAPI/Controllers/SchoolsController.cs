@@ -95,5 +95,33 @@ namespace SchoolSystemAPI.Controllers
 
             return Ok(newSchool);
         }
+
+        // Delete School by Id //
+        [Route("DeleteSchool/{Id}")]
+        [HttpPost]
+        [ProducesResponseType(200, Type=typeof(IEnumerable<School>))]
+        [ProducesResponseType(400)]
+        public IActionResult DeleteSchoolById(int Id)
+        {
+            if (!_repository.SchoolExists(Id))
+            {
+                return BadRequest(ModelState);
+            }
+            var SchoolToDelete = _repository.GetSchoolById(Id); 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (SchoolToDelete == null) 
+            {
+                return BadRequest("School Not Found");
+            }
+
+            _repository.DeleteSchoolById(SchoolToDelete); 
+
+
+            return GetSchools(); 
+        }
+
     }
 }
