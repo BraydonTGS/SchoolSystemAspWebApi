@@ -62,6 +62,12 @@ namespace SchoolSystemAPI.Repository
             return newSchool;
         }
 
+        // Delete School by Id //
+        public void DeleteSchool(School school)
+        {
+
+        }
+
         // Does School Exist //
         public bool SchoolExists(int Id)
         {

@@ -12,5 +12,7 @@ namespace SchoolSystemAPI.Interfaces
         public bool SchoolExists(int Id);
 
         public School UpdateSchool(School school, SchoolDTO schoolDTO); 
+
+        public void DeleteSchoolById(School school);
     }
 }
