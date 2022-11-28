@@ -25,11 +25,16 @@ namespace SchoolSystemAPI.Controllers
         public IActionResult GetSchools()
         {
             var schools = _repository.GetAllSchools();
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            return Ok(schools); 
+
+            var schoolDTO = schools.Select(x => new SchoolDTO(x.SchoolId, x.SchoolName, x.Address, x.City, x.State, x.PostalCode)).ToList();
+
+     
+            return Ok(schoolDTO); 
         }
 
         // Get School By Id //

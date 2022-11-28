@@ -6,21 +6,23 @@ namespace SchoolSystemAPI.DTO
 {
     public class SchoolDTO
     {
-        [Key]
-        [Required]
+        public SchoolDTO(int schoolId, string schoolName, string address, string city, string state, string postalCode)
+        {
+            SchoolId = schoolId;
+            SchoolName = schoolName;
+            Address = address;
+            City = city;
+            State = state;
+            PostalCode = postalCode;
+        }
+
         [JsonIgnore]
         public int SchoolId { get; set; }
-        [Required]
         public string SchoolName { get; set; } = null!;
-        [Required]
         public string Address { get; set; } = null!;
-        [Required]
         public string City { get; set; } = null!;
-        [Required]
         public string State { get; set; } = null!;
-        [Required]
-        public string PostalCode { get; set; } = null!;
-
+        public string PostalCode { get; set; } = null!; 
         [JsonIgnore]
         public IEnumerable<Teacher> Teachers { get; set; } = Enumerable.Empty<Teacher>();
         [JsonIgnore]
