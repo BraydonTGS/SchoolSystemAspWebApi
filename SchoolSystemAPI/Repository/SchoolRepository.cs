@@ -17,16 +17,16 @@ namespace SchoolSystemAPI.Repository
         }
 
         // Get All Schools //
-        public IEnumerable<School> GetAllSchools()
+        public async Task< IEnumerable<School>> GetAllSchools()
         {
-            return _context.Schools.OrderBy(id => id).ToList();
+            var schools = await _context.Schools.ToListAsync();
+            return schools; 
         }
 
         // Get School by Id //
-        public School? GetSchoolById(int Id)
-        {
-       
-            var school = _context.Schools.Where(s => s.SchoolId == Id).FirstOrDefault();
+        public async Task<School?> GetSchoolById(int Id)
+       { 
+            var school = await _context.Schools.Where(s => s.SchoolId == Id).FirstOrDefaultAsync();
             return school; 
         }
 

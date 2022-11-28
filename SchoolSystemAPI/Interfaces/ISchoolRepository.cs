@@ -5,8 +5,8 @@ namespace SchoolSystemAPI.Interfaces
 {
     public interface ISchoolRepository
     {
-        public IEnumerable<School> GetAllSchools();
-        public School? GetSchoolById(int Id);
+        public Task<IEnumerable<School>> GetAllSchools();
+        public Task<School?> GetSchoolById(int Id);
 
         public School CreateSchool(School school); 
         public bool SchoolExists(int Id);

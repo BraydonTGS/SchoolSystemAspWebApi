@@ -22,9 +22,9 @@ namespace SchoolSystemAPI.Controllers
         [Route("GetAllSchools")]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<School>))]
-        public IActionResult GetSchools()
+        public async Task<IActionResult> GetSchoolsAsync()
         {
-            var schools = _repository.GetAllSchools();
+            var schools = await _repository.GetAllSchools();
 
             if (!ModelState.IsValid)
             {
@@ -42,13 +42,13 @@ namespace SchoolSystemAPI.Controllers
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(School))]
         [ProducesResponseType(400)]
-        public IActionResult GetSchoolById(int Id)
+        public async Task<IActionResult> GetSchoolById(int Id)
         {
             if (!_repository.SchoolExists(Id))
             {
                 return NotFound(); 
             }
-            var school = _repository.GetSchoolById(Id);
+            var school = await _repository.GetSchoolById(Id);
 
             if (!ModelState.IsValid)
             {
@@ -122,7 +122,7 @@ namespace SchoolSystemAPI.Controllers
             _repository.DeleteSchool(SchoolToDelete); 
 
 
-            return GetSchools(); 
+            return (IActionResult)GetSchoolsAsync(); 
         }
 
     }
