@@ -58,7 +58,7 @@ namespace SchoolSystemAPI.Controllers
         [HttpPut]
         [ProducesResponseType(200, Type = typeof(School))]
         [ProducesResponseType(400)]
-        public IActionResult UpdateSchool(int Id, School newSchool) 
+        public IActionResult UpdateSchool(int Id, School updateSchool) 
         {
             if (!_repository.SchoolExists(Id))
             {
@@ -74,7 +74,7 @@ namespace SchoolSystemAPI.Controllers
             {
                 return BadRequest("School not Found"); 
             }
-            var updateMake = _repository.UpdateSchool(school, newSchool); 
+            var updateMake = _repository.UpdateSchool(school, updateSchool); 
             
             return Ok(updateMake);
         }
@@ -98,7 +98,7 @@ namespace SchoolSystemAPI.Controllers
 
         // Delete School by Id //
         [Route("DeleteSchool/{Id}")]
-        [HttpPost]
+        [HttpDelete]
         [ProducesResponseType(200, Type=typeof(IEnumerable<School>))]
         [ProducesResponseType(400)]
         public IActionResult DeleteSchoolById(int Id)

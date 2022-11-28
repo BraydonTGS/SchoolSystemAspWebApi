@@ -31,14 +31,14 @@ namespace SchoolSystemAPI.Repository
         }
 
         // Update School //
-        public School UpdateSchool(School school, School newSchool)
+        public School UpdateSchool(School school, School updateSchool)
         {
       
-            school.SchoolName = newSchool.SchoolName;
-            school.Address = newSchool.Address;
-            school.City= newSchool.City;
-            school.State= newSchool.State;
-            school.PostalCode= newSchool.PostalCode;
+            school.SchoolName = updateSchool.SchoolName;
+            school.Address = updateSchool.Address;
+            school.City= updateSchool.City;
+            school.State= updateSchool.State;
+            school.PostalCode= updateSchool.PostalCode;
 
             _context.Schools.Attach(school);
             _context.SaveChanges();
@@ -48,10 +48,8 @@ namespace SchoolSystemAPI.Repository
         // Create New School //
         public School CreateSchool(School school)
         {
-           
             _context.Schools.Add(school);
             _context.SaveChanges();
-
             return school;
         }
 
