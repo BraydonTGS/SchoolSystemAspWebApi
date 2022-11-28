@@ -31,7 +31,7 @@ namespace SchoolSystemAPI.Repository
         }
 
         // Update School //
-        public School UpdateSchool(School school, School updateSchool)
+        public async Task<School> UpdateSchool(School school, School updateSchool)
         {
       
             school.SchoolName = updateSchool.SchoolName;
@@ -41,7 +41,7 @@ namespace SchoolSystemAPI.Repository
             school.PostalCode= updateSchool.PostalCode;
 
             _context.Schools.Attach(school);
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
             return school; 
         }
 

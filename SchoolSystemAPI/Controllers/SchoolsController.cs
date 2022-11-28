@@ -63,14 +63,14 @@ namespace SchoolSystemAPI.Controllers
         [HttpPut]
         [ProducesResponseType(200, Type = typeof(School))]
         [ProducesResponseType(400)]
-        public IActionResult UpdateSchool(int Id, School updateSchool) 
+        public async Task<IActionResult> UpdateSchool(int Id, School updateSchool) 
         {
             if (!_repository.SchoolExists(Id))
             {
                 return NotFound(); 
             }
 
-            var school = _repository.GetSchoolById(Id);
+            var school = await _repository.GetSchoolById(Id);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -79,7 +79,7 @@ namespace SchoolSystemAPI.Controllers
             {
                 return BadRequest("School not Found"); 
             }
-            var updateMake = _repository.UpdateSchool(school, updateSchool); 
+            var updateMake = await _repository.UpdateSchool(school, updateSchool); 
             
             return Ok(updateMake);
         }

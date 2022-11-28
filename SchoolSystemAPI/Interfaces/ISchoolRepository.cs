@@ -8,7 +8,7 @@ namespace SchoolSystemAPI.Interfaces
         public Task<IEnumerable<School>> GetAllSchools();
         public Task<School?> GetSchoolById(int Id);
 
-        public School CreateSchool(School school); 
+        public Task<School> CreateSchool(School school); 
         public bool SchoolExists(int Id);
 
         public School UpdateSchool(School school, School newSchool); 
