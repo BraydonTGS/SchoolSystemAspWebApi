@@ -31,14 +31,14 @@ namespace SchoolSystemAPI.Repository
         }
 
         // Update School //
-        public School UpdateSchool(School school, SchoolDTO schoolDTO)
+        public School UpdateSchool(School school, School newSchool)
         {
       
-            school.SchoolName = schoolDTO.SchoolName;
-            school.Address = schoolDTO.Address;
-            school.City= schoolDTO.City;
-            school.State= schoolDTO.State;
-            school.PostalCode= schoolDTO.PostalCode;
+            school.SchoolName = newSchool.SchoolName;
+            school.Address = newSchool.Address;
+            school.City= newSchool.City;
+            school.State= newSchool.State;
+            school.PostalCode= newSchool.PostalCode;
 
             _context.Schools.Attach(school);
             _context.SaveChanges();
@@ -46,20 +46,13 @@ namespace SchoolSystemAPI.Repository
         }
 
         // Create New School //
-        public School CreateSchool(SchoolDTO dto)
+        public School CreateSchool(School school)
         {
-            var newSchool = new School()
-            {
-                SchoolName = dto.SchoolName,
-                Address = dto.Address,
-                City = dto.City,
-                State = dto.State,
-                PostalCode = dto.PostalCode,
-            }; 
-            _context.Schools.Add(newSchool);
+           
+            _context.Schools.Add(school);
             _context.SaveChanges();
 
-            return newSchool;
+            return school;
         }
 
         // Delete School by Id //

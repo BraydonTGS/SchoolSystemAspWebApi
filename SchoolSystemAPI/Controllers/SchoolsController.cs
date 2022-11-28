@@ -58,11 +58,11 @@ namespace SchoolSystemAPI.Controllers
         [HttpPut]
         [ProducesResponseType(200, Type = typeof(School))]
         [ProducesResponseType(400)]
-        public IActionResult UpdateSchool(int Id, SchoolDTO schoolDto) 
+        public IActionResult UpdateSchool(int Id, School newSchool) 
         {
             if (!_repository.SchoolExists(Id))
             {
-                return BadRequest(ModelState);
+                return NotFound(); 
             }
 
             var school = _repository.GetSchoolById(Id);
@@ -74,7 +74,7 @@ namespace SchoolSystemAPI.Controllers
             {
                 return BadRequest("School not Found"); 
             }
-            var updateMake = _repository.UpdateSchool(school, schoolDto); 
+            var updateMake = _repository.UpdateSchool(school, newSchool); 
             
             return Ok(updateMake);
         }
@@ -84,7 +84,7 @@ namespace SchoolSystemAPI.Controllers
         [HttpPost]
         [ProducesResponseType(200, Type = typeof(School))]
         [ProducesResponseType(400)]
-        public IActionResult CreateNewSchool(SchoolDTO school)
+        public IActionResult CreateNewSchool(School school)
         {
             if (!ModelState.IsValid)
             {
@@ -114,7 +114,7 @@ namespace SchoolSystemAPI.Controllers
                 return BadRequest("School Not Found");
             }
 
-            _repository.DeleteSchoolById(SchoolToDelete); 
+            _repository.DeleteSchool(SchoolToDelete); 
 
 
             return GetSchools(); 

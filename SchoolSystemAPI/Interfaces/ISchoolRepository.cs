@@ -8,11 +8,11 @@ namespace SchoolSystemAPI.Interfaces
         public IEnumerable<School> GetAllSchools();
         public School? GetSchoolById(int Id);
 
-        public School CreateSchool(SchoolDTO school); 
+        public School CreateSchool(School school); 
         public bool SchoolExists(int Id);
 
-        public School UpdateSchool(School school, SchoolDTO schoolDTO); 
+        public School UpdateSchool(School school, School newSchool); 
 
-        public void DeleteSchoolById(School school);
+        public void DeleteSchool(School school);
     }
 }
