@@ -25,9 +25,8 @@ namespace SchoolSystemAPI.Repository
 
         // Get School by Id //
         public async Task<School?> GetSchoolById(int Id)
-       { 
-            var school = await _context.Schools.Where(s => s.SchoolId == Id).FirstOrDefaultAsync();
-            return school; 
+        { 
+           return await _context.Schools.Where(s => s.SchoolId == Id).FirstOrDefaultAsync();
         }
 
         // Update School //
@@ -46,10 +45,10 @@ namespace SchoolSystemAPI.Repository
         }
 
         // Create New School //
-        public School CreateSchool(School school)
+        public async Task<School> CreateSchool(School school)
         {
-            _context.Schools.Add(school);
-            _context.SaveChanges();
+            await _context.Schools.AddAsync(school);
+            await _context.SaveChangesAsync();
             return school;
         }
 
@@ -61,9 +60,9 @@ namespace SchoolSystemAPI.Repository
         }
 
         // Does School Exist //
-        public bool SchoolExists(int Id)
+        public async Task<bool> SchoolExists(int Id)
         {
-            return _context.Schools.Any(s => s.SchoolId == Id);
+            return await _context.Schools.AnyAsync(s => s.SchoolId == Id);
         }
 
     }

@@ -44,7 +44,8 @@ namespace SchoolSystemAPI.Controllers
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetSchoolById(int Id)
         {
-            if (!_repository.SchoolExists(Id))
+            var exists = await _repository.SchoolExists(Id);
+            if (!exists)
             {
                 return NotFound(); 
             }
@@ -65,7 +66,8 @@ namespace SchoolSystemAPI.Controllers
         [ProducesResponseType(400)]
         public async Task<IActionResult> UpdateSchool(int Id, School updateSchool) 
         {
-            if (!_repository.SchoolExists(Id))
+            var exists = await _repository.SchoolExists(Id);
+            if (!exists)
             {
                 return NotFound(); 
             }
@@ -89,14 +91,14 @@ namespace SchoolSystemAPI.Controllers
         [HttpPost]
         [ProducesResponseType(200, Type = typeof(School))]
         [ProducesResponseType(400)]
-        public IActionResult CreateNewSchool(School school)
+        public async Task< IActionResult> CreateNewSchool(School school)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-           var newSchool = _repository.CreateSchool(school);
+            var newSchool = await _repository.CreateSchool(school);
 
             return Ok(newSchool);
         }
@@ -106,10 +108,10 @@ namespace SchoolSystemAPI.Controllers
         [HttpDelete]
         [ProducesResponseType(200, Type=typeof(IEnumerable<School>))]
         [ProducesResponseType(400)]
-        public IActionResult DeleteSchoolById(int Id)
+        public async Task<IActionResult> DeleteSchoolById(int Id)
         {
 
-            var SchoolToDelete = _repository.GetSchoolById(Id); 
+            var SchoolToDelete = await _repository.GetSchoolById(Id); 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

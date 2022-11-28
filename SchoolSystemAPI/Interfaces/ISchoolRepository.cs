@@ -9,9 +9,9 @@ namespace SchoolSystemAPI.Interfaces
         public Task<School?> GetSchoolById(int Id);
 
         public Task<School> CreateSchool(School school); 
-        public bool SchoolExists(int Id);
+        public Task<bool> SchoolExists(int Id);
 
-        public School UpdateSchool(School school, School newSchool); 
+        public Task<School> UpdateSchool(School school, School newSchool); 
 
         public void DeleteSchool(School school);
     }
