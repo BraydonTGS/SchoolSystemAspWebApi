@@ -103,10 +103,7 @@ namespace SchoolSystemAPI.Controllers
         [ProducesResponseType(400)]
         public IActionResult DeleteSchoolById(int Id)
         {
-            if (!_repository.SchoolExists(Id))
-            {
-                return BadRequest(ModelState);
-            }
+
             var SchoolToDelete = _repository.GetSchoolById(Id); 
             if (!ModelState.IsValid)
             {

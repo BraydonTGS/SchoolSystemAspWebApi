@@ -65,7 +65,8 @@ namespace SchoolSystemAPI.Repository
         // Delete School by Id //
         public void DeleteSchool(School school)
         {
-
+            _context.Remove(school);
+            _context.SaveChanges();
         }
 
         // Does School Exist //
