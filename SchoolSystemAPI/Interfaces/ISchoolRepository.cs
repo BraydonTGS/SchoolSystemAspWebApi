@@ -5,13 +5,13 @@ namespace SchoolSystemAPI.Interfaces
 {
     public interface ISchoolRepository
     {
-        public Task<IEnumerable<School>> GetAllSchools();
-        public Task<School?> GetSchoolById(int Id);
+        public Task<IEnumerable<School>> GetAllSchoolsAsync();
+        public Task<School?> GetSchoolByIdAsync(int Id);
 
-        public Task<School> CreateSchool(School school); 
-        public Task<bool> SchoolExists(int Id);
+        public Task<School> CreateSchoolAsync(School school); 
+        public Task<bool> SchoolExistsAsync(int Id);
 
-        public Task<School> UpdateSchool(School school, School newSchool); 
+        public Task<School> UpdateSchoolAsync(School school, School newSchool); 
 
         public void DeleteSchool(School school);
     }

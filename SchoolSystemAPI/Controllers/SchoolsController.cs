@@ -22,9 +22,9 @@ namespace SchoolSystemAPI.Controllers
         [Route("GetAllSchools")]
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<School>))]
-        public async Task<IActionResult> GetSchoolsAsync()
+        public async Task<IActionResult> GetSchools()
         {
-            var schools = await _repository.GetAllSchools();
+            var schools = await _repository.GetAllSchoolsAsync();
 
             if (!ModelState.IsValid)
             {
@@ -44,17 +44,16 @@ namespace SchoolSystemAPI.Controllers
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetSchoolById(int Id)
         {
-            var exists = await _repository.SchoolExists(Id);
+            var exists = await _repository.SchoolExistsAsync(Id);
             if (!exists)
             {
                 return NotFound(); 
             }
-            var school = await _repository.GetSchoolById(Id);
+            var school = await _repository.GetSchoolByIdAsync(Id);
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-
             }
             return Ok(school);
         }
@@ -66,28 +65,44 @@ namespace SchoolSystemAPI.Controllers
         [ProducesResponseType(400)]
         public async Task<IActionResult> UpdateSchool(int Id, School updateSchool) 
         {
-            var exists = await _repository.SchoolExists(Id);
+            var exists = await _repository.SchoolExistsAsync(Id);
             if (!exists)
             {
                 return NotFound(); 
             }
 
-            var school = await _repository.GetSchoolById(Id);
+            var school = await _repository.GetSchoolByIdAsync(Id);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+
             if (school is null)
             {
                 return BadRequest("School not Found"); 
             }
-            var updateMake = await _repository.UpdateSchool(school, updateSchool); 
+
+            var updateMake = await _repository.UpdateSchoolAsync(school, updateSchool); 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var updateMakeDTO = new SchoolDTO()
+            {
+                SchoolId = updateMake.SchoolId,
+                SchoolName = updateMake.SchoolName,
+                Address = updateMake.Address,
+                City = updateMake.City,
+                State = updateMake.State,
+                PostalCode = updateMake.PostalCode,
+            };
             
-            return Ok(updateMake);
+            return Ok(updateMakeDTO);
         }
 
         // Create a New School //
-        [Route("CreateNewSchoolTest")]
+        [Route("CreateNewSchool")]
         [HttpPost]
         [ProducesResponseType(200, Type = typeof(School))]
         [ProducesResponseType(400)]
@@ -98,9 +113,23 @@ namespace SchoolSystemAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var newSchool = await _repository.CreateSchool(school);
+            var newSchool = await _repository.CreateSchoolAsync(school);
 
-            return Ok(newSchool);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var newSchoolDTO = new SchoolDTO()
+            {
+                SchoolId = newSchool.SchoolId,
+                SchoolName = newSchool.SchoolName,
+                Address = newSchool.Address,
+                City = newSchool.City,
+                State = newSchool.State,
+                PostalCode = newSchool.PostalCode,
+            }; 
+
+            return Ok(newSchoolDTO);
         }
 
         // Delete School by Id //
@@ -111,7 +140,7 @@ namespace SchoolSystemAPI.Controllers
         public async Task<IActionResult> DeleteSchoolById(int Id)
         {
 
-            var SchoolToDelete = await _repository.GetSchoolById(Id); 
+            var SchoolToDelete = await _repository.GetSchoolByIdAsync(Id); 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -121,10 +150,10 @@ namespace SchoolSystemAPI.Controllers
                 return BadRequest("School Not Found");
             }
 
-            _repository.DeleteSchool(SchoolToDelete); 
+            _repository.DeleteSchool(SchoolToDelete);
 
 
-            return (IActionResult)GetSchoolsAsync(); 
+            return await GetSchools();
         }
 
     }

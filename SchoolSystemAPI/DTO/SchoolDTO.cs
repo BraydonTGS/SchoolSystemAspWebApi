@@ -6,6 +6,10 @@ namespace SchoolSystemAPI.DTO
 {
     public class SchoolDTO
     {
+        public SchoolDTO()
+        {
+        }
+
         public SchoolDTO(int schoolId, string schoolName, string address, string city, string state, string postalCode)
         {
             SchoolId = schoolId;
@@ -15,14 +19,13 @@ namespace SchoolSystemAPI.DTO
             State = state;
             PostalCode = postalCode;
         }
-
-        [JsonIgnore]
         public int SchoolId { get; set; }
         public string SchoolName { get; set; } = null!;
         public string Address { get; set; } = null!;
         public string City { get; set; } = null!;
         public string State { get; set; } = null!;
         public string PostalCode { get; set; } = null!; 
+
         [JsonIgnore]
         public IEnumerable<Teacher> Teachers { get; set; } = Enumerable.Empty<Teacher>();
         [JsonIgnore]
