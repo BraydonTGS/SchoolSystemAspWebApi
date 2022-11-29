@@ -51,7 +51,6 @@ namespace SchoolSystemAPI.Repository
         // Update Student //
         public async Task<Student> UpdateStudentAsync(Student student, Student newStudent)
         {
-            student.StudentId = newStudent.StudentId;
             student.FirstName = newStudent.FirstName;
             student.LastName = newStudent.LastName;
             student.Email = newStudent.Email;

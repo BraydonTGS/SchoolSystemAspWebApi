@@ -88,8 +88,7 @@ namespace SchoolSystemAPI.Controllers
             }
 
             var updateMakeDTO = new SchoolDTO()
-            {
-                SchoolId = updateMake.SchoolId,
+            {   SchoolId = updateMake.SchoolId,
                 SchoolName = updateMake.SchoolName,
                 Address = updateMake.Address,
                 City = updateMake.City,
