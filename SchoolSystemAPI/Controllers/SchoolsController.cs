@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using SchoolSystemAPI.DTO;
 using SchoolSystemAPI.Interfaces;
 using SchoolSystemAPI.Models;
@@ -30,7 +29,7 @@ namespace SchoolSystemAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            
             var schoolDTO = schools.Select(x => new SchoolDTO(x.SchoolId, x.SchoolName, x.Address, x.City, x.State, x.PostalCode)).ToList();
 
      
