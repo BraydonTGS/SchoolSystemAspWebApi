@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 // Dependency Injection && Repository Pattern //
 builder.Services.AddScoped<ISchoolRepository, SchoolRepository>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<ISubjectRepository, SubjectRepository>();
 
 // Adding Db Context //
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
