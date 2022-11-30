@@ -1,5 +1,6 @@
 ﻿using SchoolSystemAPI.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace SchoolSystemAPI.DTO
 {
@@ -13,6 +14,7 @@ namespace SchoolSystemAPI.DTO
         public string LastName { get; set; } = null!;
         public string Email { get; set; } = null!;
         public string ContactNumber { get; set; } = null!;
+        [JsonIgnore]
         public IEnumerable<Subject> Subjects { get; set; } = Enumerable.Empty<Subject>();
 
         public TeacherDTO()

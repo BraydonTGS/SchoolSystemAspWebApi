@@ -11,7 +11,7 @@ namespace SchoolSystemAPI.DTO
         [Required]
         public int SubjectId { get; set; }
         public string SubjectName { get; set; } = null!;
-        [JsonIgnore]
+    
         public ClassRoom ClassRoom { get; set; } = new ClassRoom();
 
         public SubjectDTO()
