@@ -136,17 +136,17 @@ namespace SchoolSystemAPI.Controllers
         public async Task<IActionResult> DeleteStudentById(int Id)
         {
 
-            var StudentToDelete = await _repository.GetStudentByIdAsync(Id);
+            var studentToDelete = await _repository.GetStudentByIdAsync(Id);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            if (StudentToDelete == null)
+            if (studentToDelete == null)
             {
                 return BadRequest("School Not Found");
             }
 
-            _repository.DeleteStudent(StudentToDelete);
+            _repository.DeleteStudent(studentToDelete);
 
 
             return await GetStudents();
