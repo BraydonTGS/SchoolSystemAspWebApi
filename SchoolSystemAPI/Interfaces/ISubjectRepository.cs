@@ -12,6 +12,6 @@ namespace SchoolSystemAPI.Interfaces
 
         public Task<Subject> UpdateSubjectAsync(Subject subject, Subject newSubject);
 
-        public void DeleteStudent(Subject subject);
+        public void DeleteSubject(Subject subject);
     }
 }

@@ -14,12 +14,14 @@ namespace SchoolSystemAPI.Repository
             _context = context;
         }
 
-        public Task<Subject> CreateSubjectAsync(Subject subject)
+        public async Task<Subject> CreateSubjectAsync(Subject subject)
         {
-            throw new NotImplementedException();
+            await _context.Subjects.AddAsync(subject);
+            await _context.SaveChangesAsync();
+            return subject;
         }
 
-        public void DeleteStudent(Subject subject)
+        public void DeleteSubject(Subject subject)
         {
             _context.Remove(subject);
             _context.SaveChanges();
@@ -41,9 +43,15 @@ namespace SchoolSystemAPI.Repository
             return await _context.Subjects.AnyAsync(s => s.SubjectId == Id);
         }
 
-        public Task<Subject> UpdateSubjectAsync(Subject subject, Subject newSubject)
+        public async Task<Subject> UpdateSubjectAsync(Subject subject, Subject newSubject)
         {
-            throw new NotImplementedException();
+            subject.SubjectId = newSubject.SubjectId;
+            subject.SubjectName = newSubject.SubjectName;
+            subject.ClassRoom = newSubject.ClassRoom;
+
+            _context.Subjects.Attach(subject);
+            await _context.SaveChangesAsync();
+            return subject;
         }
     }
 }
