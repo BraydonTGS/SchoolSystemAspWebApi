@@ -12,11 +12,17 @@ namespace SchoolSystemAPI.DTO
         public string SubjectName { get; set; } = null!;
         public ClassRoom ClassRoom { get; set; } = null!;
 
+        public SubjectDTO()
+        {
+        }
+
         public SubjectDTO(int subjectId, string subjectName, ClassRoom classRoom)
         {
             SubjectId = subjectId;
             SubjectName = subjectName;
             ClassRoom = classRoom;
         }
+
+      
     }
 }
