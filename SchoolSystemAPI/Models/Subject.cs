@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace SchoolSystemAPI.Models
 {
@@ -8,6 +9,7 @@ namespace SchoolSystemAPI.Models
         [Required]
         public int SubjectId { get; set; }
         public string SubjectName { get; set; } = null!;
+        [JsonIgnore]
         public ClassRoom ClassRoom { get; set; } = null!; 
 
     }

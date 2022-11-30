@@ -7,6 +7,7 @@ namespace SchoolSystemAPI.Models
         [Key]
         [Required]
         public int ClassRoomId { get; set; }
+        public int ClassRoomNumber { get; set; }
 
     }
 }
