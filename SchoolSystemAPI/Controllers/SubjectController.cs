@@ -91,6 +91,7 @@ namespace SchoolSystemAPI.Controllers
             {
                 SubjectId = Id,
                 SubjectName = update.SubjectName,
+                ClassRoom= update.ClassRoom,
             };
 
             return Ok(updatedSubject);
@@ -116,8 +117,9 @@ namespace SchoolSystemAPI.Controllers
             }
             var newSubjectDTO = new SubjectDTO()
             {
-              SubjectId = newSubject.SubjectId,
-              SubjectName = newSubject.SubjectName
+                SubjectId = newSubject.SubjectId,
+                SubjectName = newSubject.SubjectName,
+                ClassRoom= newSubject.ClassRoom
             };
 
             return Ok(newSubjectDTO);

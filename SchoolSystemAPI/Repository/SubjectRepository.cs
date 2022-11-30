@@ -44,8 +44,7 @@ namespace SchoolSystemAPI.Repository
         }
 
         public async Task<Subject> UpdateSubjectAsync(Subject subject, Subject newSubject)
-        {
-            subject.SubjectId = newSubject.SubjectId;
+        { 
             subject.SubjectName = newSubject.SubjectName;
             subject.ClassRoom = newSubject.ClassRoom;
 

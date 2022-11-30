@@ -56,6 +56,7 @@ namespace SchoolSystemAPI.Repository
             student.Email = newStudent.Email;
             student.ContactNumber = newStudent.ContactNumber;
 
+
             _context.Students.Attach(student);
             await _context.SaveChangesAsync();
             return student;
